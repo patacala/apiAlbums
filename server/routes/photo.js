@@ -120,6 +120,34 @@ app.get('/photo/find-album/:value', (req, res) => {
 });
 
 
+// ===========================
+//  Search photos by name like
+// ===========================
+app.get('/photo/find/:value', (req, res) => {
+
+    let value = req.params.value;
+
+    Photo.find({ name : {'$regex': `${value}`} })
+        .limit(10000)
+        .exec((err, photos) => {
+
+            if (err) {
+                return res.status(500).json({
+                    ok: false,
+                    err
+                });
+            }
+
+            res.json({
+                ok: true,
+                photos
+            })
+
+        })
+
+
+});
+
 
 // // ===========================
 // //  UpdatePhoto

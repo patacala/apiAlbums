@@ -34,21 +34,25 @@ app.use(require('./routes/index'));
 
 
 
-// database conection
-mongoose.connect(process.env.URLDB, (err, res) => {
+// // database conection
+// mongoose.connect(process.env.URLDB, (err, res) => {
     
-    if (err) throw err;
+//     if (err) throw err;
     
-    console.log('Database SUCCESSFULLY connected');
+//     console.log('Database SUCCESSFULLY connected');
     
-});
+// });
+mongoose.connection.openUri('mongodb+srv://master:890607@cluster0-7cace.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useCreateIndex: true },
+    (err, res) => {
 
-// mongoose.connection.openUri('mongodb+srv://admin:UzwqzVF0re09He3R@cluster0-7cace.mongodb.net/test?retryWrites=true&w=majority',
-//     (err, res) => {
+        if (err) throw err;
+        console.log('Basde de datos: \x1b[32m%s\x1b[0m', 'online');
+    });
+// (err, res) => {
 
-//         if (err) throw err;
-//         console.log('Basde de datos: \x1b[32m%s\x1b[0m', 'online');
-//     });
+    //     if (err) throw err;
+    //     console.log('Basde de datos: \x1b[32m%s\x1b[0m', 'online');
+    // });
 
     
 // listen app
